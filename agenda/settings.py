@@ -31,13 +31,26 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
+    'django.contrib.sites',
+    'core',
+
+    # 3rd party
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+
+    # local apps
+    "pages.apps.PagesConfig",
+
+    # Forms
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -104,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
@@ -124,3 +137,26 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# django-allauth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = "/agenda"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+ACCOUNT_SESSION_REMEMBER = True
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# Só precisa digitar a senha uma vez
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+# Não precisa de username
+ACCOUNT_USERNAME_REQUIRED = False
+# Método de autenticação: email
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+# Email obrigatório
+ACCOUNT_EMAIL_REQUIRED = True
+# Email único
+ACCOUNT_UNIQUE_EMAIL = True
