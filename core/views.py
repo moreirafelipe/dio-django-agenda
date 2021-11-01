@@ -12,4 +12,4 @@ def lista_eventos(request):
     usuario = request.user
     evento = Evento.objects.all
     dados = {'eventos': evento}
-    return render(request, 'agenda.html', dados)
+    return render(request, 'home.html', dados)
